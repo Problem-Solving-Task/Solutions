@@ -1,0 +1,86 @@
+rom flask import Flask, render_template, request, redirect, url_for, flash
+import random
+
+app = Flask(_name_)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
+# Dummy database for users
+users = [
+    {'email': 'user1@example.com', 'phone': '1234567890', 'password': 'password1'},
+    {'email': 'user2@example.com', 'phone': '9876543210', 'password': 'password2'}
+]
+
+# Routes
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email_phone = request.form['email_phone']
+        password = request.form['password']
+        user = None
+        for u in users:
+            if (u['email'] == email_phone or u['phone'] == email_phone) and u['password'] == password:
+                user = u
+                break
+        if user:
+            flash('Login successful', 'success')
+            return redirect(url_for('dashboard'))
+        else:
+            flash('Invalid credentials', 'error')
+    return render_template('login.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        email = request.form['email']
+        phone = request.form['phone']
+        password = request.form['password']
+        confirm_password = request.form['confirm_password']
+        if password != confirm_password:
+            flash('Passwords do not match', 'error')
+        else:
+            users.append({'email': email, 'phone': phone, 'password': password})
+            flash('Registration successful. Please login.', 'success')
+            return redirect(url_for('login'))
+    return render_template('register.html')
+
+@app.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        email = request.form['email']
+        # Simulate sending OTP to email
+        otp = random.randint(1000, 9999)
+        flash(f'OTP sent to {email}: {otp}', 'info')
+        return redirect(url_for('verify_otp'))
+    return render_template('forgot_password.html')
+
+@app.route('/verify_otp', methods=['GET', 'POST'])
+def verify_otp():
+    if request.method == 'POST':
+        otp = request.form['otp']
+        # Simulate OTP verification
+        flash('OTP verified', 'success')
+        return redirect(url_for('reset_password'))
+    return render_template('verify_otp.html')
+
+@app.route('/reset_password', methods=['GET', 'POST'])
+def reset_password():
+    if request.method == 'POST':
+        new_password = request.form['new_password']
+        confirm_password = request.form['confirm_password']
+        if new_password != confirm_password:
+            flash('Passwords do not match', 'error')
+        else:
+            flash('Password reset successful', 'success')
+            return redirect(url_for('login'))
+    return render_template('reset_password.html')
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+if _name_ == '_main_':
+    app.run(debug=True)
