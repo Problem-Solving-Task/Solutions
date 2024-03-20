@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="profile.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha384-oSmedf5T1dVSeI2t1sAOvnlAP2Pi/oek0zf2P+9GwqhsW87tw2I8M3vccsfMbeST" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <title>Profile</title>
+</head>
+<body>
+  <header>
+    
+      <nav class="navbar">
+          <div class="navbar-logo"><img src="/logo.jpg" alt=""></div>
+          <h1>Sachin</h1>
+
+          <ul class="navbar-menu" id="menu">
+              <li style="display: flex;"><a href="/main/main.html">Home</a></li>
+              
+              <li><a href="/login.html">Login & Register</a></li>
+              <a href="/profile/profile.html"><i class="fa-solid fa-user" style="color: rgb(0, 0, 0); font-size: 30px; cursor: pointer;"></i></a>
+          </ul>
+          <div class="navbar-toggle" id="navbarToggle">
+              <div class="bar"></div>
+              <div class="bar"></div>
+          </div>
+      </nav>
+  </div>
+  <div class="popup" id="popup">
+      <div id="closeBtn"><i class="fa-solid fa-xmark"></i></div>
+      <ul class="navbar-menu2" id="menu">
+        <li style="display: flex;"><a href="/main/main.html">Home</a></li>
+              
+        <li><a href="/login.html">Login & Register</a></li>
+        <a href="/profile/profile.html"><i class="fa-solid fa-user" style="color: rgb(0, 0, 0); font-size: 30px; cursor: pointer;"></i></a>
+      </ul>
+  </div>
+  <script>
+      document.getElementById('navbarToggle').addEventListener('click', function () {
+          document.getElementById('popup').style.right = '0';
+      });
+
+      document.getElementById('closeBtn').addEventListener('click', function () {
+          document.getElementById('popup').style.right = '-50%';
+      });
+  </script>
+
+
+    </nav>
+  </header>
+  <main>   <div class="profile">
+    <h2>User Profile</h2>
+  </div>
+
+  <div class="profile-container">
+    <img src="pro.webp" alt="Upload Your Pic" class="profile-picture" id="profilePicture" onclick="openFileExplorer()">
+    <span id="profileImageText" onclick="openFileExplorer()">Click Here to <br>Upload New Pic</span>
+
+    
+    <div class="user-details">
+      <h2 id="userName">Enter your Name</h2>
+      <p id="userEmail">wredfwrf@example.com</p>
+      <p id="userRole">Student</p>
+      <button onclick="openEditPopup()" id="button">Edit Profile</button>
+
+    </div>
+
+    <div class="courses-enrolled">
+      <h3>Courses Enrolled:</h3>
+      <ul id="itemList"></ul>
+    </div>
+  </div>
+
+  <!-- Popup for editing -->
+  <div id="editPopup" class="popup">
+    <h2>Edit Profile</h2>
+    <div class="edit-content">
+      <label for="editUserName">Name:</label>
+      <textarea id="editUserName" required></textarea>
+
+      <label for="editUserEmail" >Email:</label>
+      <textarea id="editUserEmail"></textarea>
+
+      <label for="editUserRole">Role:</label>
+      <textarea id="editUserRole"></textarea>
+      <button onclick="saveProfile()" id="button">Save</button>
+
+    </div>
+
+  </div>
+  <script src="profile.js"></script>
+  
+  <script src="profile.js"></script>
+</main>
+
+<footer>
+    <div class="footer-one">
+    <div class="logo">
+        <img src="/logo.jpg" alt="">
+        <h3>Sachin </h3>
+        
+    </div>
+    <div class="address">
+    <h4>Corporate Headquarters    </h4>
+    <p>D-25, 1st Floor, Lajpat Nagar -II, New Delhi 110024    </p>
+    <h4>Customer Support    </h4>
+<p>+1 408 372 0541</p></div>
+<div class="last">
+<p>Copyright by Truechip © 2023 All Rights Reserved.</p></div>
+</div>
+
+<div class="footer-two">
+    <h3>Quick Links</h3>
+    <ul>
+        <li><a href="#">Latest News</a></li>
+<li><a href="#">Upcoming Events</a></li>
+        <li><a href="#">carrers</a></li>
+        <li><a href="#">Partners & Alliances</a></li>
+        <li><a href="#">Terms of Use</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Cookies</a></li>
+
+    </ul></div>
+    <div class="footer-last">
+<h3>Subscribe for Truechip newsletter</h3>
+<div class="submit-contact">
+    <input type="email" placeholder="Your Email Id" id="gmail" required>
+    <button type="submit" onclick="Submit()">submit</button>
+</div>
+<script>
+
+       function Submit() {  
+        var gmail = document.getElementById('gmail');
+
+        gmail.style.border = '1px solid white';
+        if (gmail.checkValidity() === false) {
+            alert("Please enter a valid email address.");
+            gmail.style.borderBottom = '2px solid red';
+            return;
+        }
+        // If all validations pass, proceed to submit
+        openMail2();
+    }
+
+    function openMail2() {
+        // Set the recipient email address
+        var toAddress = 'example@example.com';
+
+        // Set a specific subject
+        var subject = "Let's Make A Conversation";
+
+        // Construct the email body with form input values
+        var body = `My Email: ${document.getElementById('gmail').value}`;
+
+     // Open Gmail compose window with pre-filled details
+  var gmailLink = "https://mail.google.com/mail/?view=cm&fs=1&to=hegdeprekshwswswsswith@gmail.com&su=" +
+                        encodeURIComponent("Let's Make A Conversation") +
+                        "&body=" + encodeURIComponent(body);
+
+        window.open(gmailLink, "_blank");
+         // Display an alert message
+         alert(`We get the response. We are exited to start the converstaion. `);
+    }
+</script>
+<div class="social">
+    <a href="#"> <button><i class="fa-brands fa-facebook-f"></i></button></a>
+    <a href="#"><button><i class="fa-brands fa-linkedin"></i></button></a>
+    <a href="#"> <button><i class="fa-brands fa-twitter"></i></button></a>
+    <a href="#"><button><i class="fa-brands fa-youtube"></i></button></a>
+</div>
+ 
+<div id="google_translate_element"> </div>
+
+<script>
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi'  // Add more language codes as needed
+    }, 'google_translate_element');
+}
+
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  
+ </footer>
+ </body>
+ </html>
+ 
